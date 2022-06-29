@@ -1,0 +1,36 @@
+{
+  // editor
+  "editor.formatOnPaste": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.formatOnType": true,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  // javascript
+  "javascript.suggestionActions.enabled": false,
+  // typescript
+  "typescript.suggestionActions.enabled": false,
+  // thunder-client
+  "thunder-client.saveToWorkspace": true,
+  // files
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    ".coverage": true,
+    ".nyc_output": true,
+    "thunder-tests": true,
+    "**/.gitkeep": true,
+    ".npmrc":true
+  },
+  // barrelr
+  "barrelr.lineEnding": "LF"
+}

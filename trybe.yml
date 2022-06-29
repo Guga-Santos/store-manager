@@ -1,0 +1,8 @@
+ignore_files:
+  - ./__tests__
+  - .editorconfig
+  - .eslintignore
+  - .eslintrc.json
+  - jest.config.js
+  - migration.sql
+  - seed.sql
