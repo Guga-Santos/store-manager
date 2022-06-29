@@ -1,6 +1,6 @@
 const productsService = require('../../../services/productService');
 const productsController = require('../../../controllers/productController');
-const { expect } = require('chai');
+const {expect} = require('chai');
 const sinon = require('sinon');
 
 describe('Consulta os products no BD e retorna todos os dados encontrados', ()=>{
