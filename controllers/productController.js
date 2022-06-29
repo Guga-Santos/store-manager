@@ -21,7 +21,18 @@ const findById = async (req, res, next) => {
   }
 };
 
+const addProduct = async (req, res, next) => {
+  try {
+    const { name } = req.body;
+    const data = await productService.addProduct(name);
+    res.status(201).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAll,
   findById,
+  addProduct,
 };
