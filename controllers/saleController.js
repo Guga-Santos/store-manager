@@ -21,7 +21,21 @@ const findById = async (req, res, next) => {
   }
 };
 
+const deleteSales = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const findId = await saleService.findById(id);
+    if (!findId || findId.length < 1) return res.status(404).json({ message: 'Sale not found' });
+
+    const deleted = await saleService.deleteSales(id);
+    if (deleted) return res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAll,
   findById,
+  deleteSales,
 };

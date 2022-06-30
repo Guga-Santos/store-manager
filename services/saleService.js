@@ -10,7 +10,13 @@ const findById = async (id) => {
   return data;
 };
 
+const deleteSales = async (id) => {
+  await salesModel.deleteSales(id);
+  return true;
+};
+
 module.exports = {
   getAll,
   findById,
+  deleteSales,
 };
