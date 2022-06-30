@@ -2,6 +2,7 @@ const express = require('express');
 const rescue = require('express-rescue');
 const errorMiddleware = require('./middlewares/productError'); 
 const productRoute = require('./routes/productRoute');
+const saleRoute = require('./routes/salesRoute');
 
 const app = express();
 
@@ -14,6 +15,10 @@ app.use(express.json());
 
 app.use('products/:id', rescue(productRoute));
 app.use('/products', rescue(productRoute));
+
+app.use('sales/:id', rescue(saleRoute));
+app.use('/sales', rescue(saleRoute));
+
 app.use(errorMiddleware);
 
 // não remova essa exportação, é para o avaliador funcionar
