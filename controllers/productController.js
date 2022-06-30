@@ -39,8 +39,28 @@ const addProduct = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const findId = await productService.findById(id);
+    if (!name) return res.status(400).json({ message: '"name" is required' });
+    if (name.length < 5) {
+ return res.status(422)
+      .json({ message: '"name" length must be at least 5 characters long' }); 
+} 
+    if (!findId) return res.status(404).json({ message: 'Product not found' });
+
+    await productService.update(id, name);
+    res.status(200).json({ id, name });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAll,
   findById,
   addProduct,
+  update,
 };

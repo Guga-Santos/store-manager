@@ -34,12 +34,7 @@ describe('Consulta products no BD e retorna o produto com id específico', () =>
   const req = { params: { id: 1 } };
   const error = { params: { id: 5 } };
   const next = () => {};
-  const resolve = [
-  {
-    "id": 1,
-    "name": "Martelo de Thor"
-  }
-  ]
+  const resolve = [{}];
   afterEach(sinon.restore)
   it('é chamado o método "status" com o código 200', async () => {
     res.status = sinon.stub().returns(res);
