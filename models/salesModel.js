@@ -2,6 +2,7 @@ const connection = require('./connections');
 
 const addSale = async () => {
   const query = 'INSERT INTO StoreManager.sales (date) VALUES (NOW());';
+  // https://www.w3schools.com/sql/func_mysql_now.asp
   const [data] = await connection.execute(query);
   const { insertId } = data;
   return insertId;
@@ -46,6 +47,7 @@ const deleteSales = async (id) => {
   await connection.execute(query, [id]);
   return true;
 };
+
 
 module.exports = {
   addSale,
