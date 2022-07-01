@@ -30,7 +30,7 @@ const productsAuth = async (id) => {
   const data = await productModel.findById(id);
   if (!data) return false;
   return true;
-}
+};
 
 const salesAuth = (products) => {
   const idAuth = products.some((product) => !product.productId);
@@ -38,32 +38,37 @@ const salesAuth = (products) => {
   const quantityMin = products.some((product) => product.quantity <= 0);
 
   if (idAuth) return { code: 400, message: { message: '"productId" is required' } };
-  if (quantityMin) return { code: 422, message: { message: '"quantity" must be greater than or equal to 1' } };
+  if (quantityMin) {
+ return {
+    code: 422,
+    message: { message: '"quantity" must be greater than or equal to 1' },
+  }; 
+}
   if (quantityAuth) return { code: 400, message: { message: '"quantity" is required' } };
   
   return {};
-}
+};
 
-const newSale = async (products) => {
-  const saleAuth = await salesAuth(products);
+const newSale = async (prod) => {
+  const saleAuth = salesAuth(prod);
   if (saleAuth.code) return saleAuth;  
    const auth = [];
-    for(const product of products) {
-      const result = await productsAuth(product.productId);
+  for (let i = 0; i < prod.length; i += 1) {
+      const result = productsAuth(prod[i].productId);
       auth.push(result);
-    }
-    const notFound = auth.some((item) => item !== true);
-    if (notFound) return { code: 404, message: { message: 'Product not found' } };
-   const saleId = await salesModel.addSale();
-  const itemsSold = [];
-  for (const product of products) {
-    const result = await salesModel.addSoldProduct(saleId, product.productId, product.quantity);
-    itemsSold.push(result);
   }
-  return { code: 201, message: { id: saleId, itemsSold: itemsSold } };
-}
-
-
+    const auths = await Promise.all(auth);
+    const notFound = auths.some((item) => item !== true);
+    if (notFound) return { code: 404, message: { message: 'Product not found' } };
+    const saleId = await salesModel.addSale();
+    const items = [];
+    for (let i = 0; i < prod.length; i += 1) {
+     const result = salesModel.addSoldProduct(saleId, prod[i].productId, prod[i].quantity);
+    items.push(result);
+    }
+  const itemsSold = await Promise.all(items);
+  return { code: 201, message: { id: saleId, itemsSold } };
+};
 
 module.exports = {
   getAll,

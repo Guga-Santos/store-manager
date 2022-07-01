@@ -38,11 +38,10 @@ const newSale = async (req, res, next) => {
   try {
     const sale = await saleService.newSale(req.body);
     return res.status(sale.code).json(sale.message);
-
   } catch (error) {
     next(error);
   }
-}
+};
 
 module.exports = {
   getAll,

@@ -48,7 +48,6 @@ const deleteSales = async (id) => {
   return true;
 };
 
-
 module.exports = {
   addSale,
   addSoldProduct,
