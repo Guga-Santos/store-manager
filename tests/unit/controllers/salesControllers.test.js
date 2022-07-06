@@ -3,7 +3,7 @@ const saleController = require('../../../controllers/saleController');
 const {expect} = require('chai');
 const sinon = require('sinon');
 
-describe('Consulta os products no BD e retorna todos os dados encontrados', () => {
+describe('Consulta sales no BD e retorna todos os dados encontrados', () => {
   const res = {};
   const req = {};
   const next = () => {};
@@ -29,7 +29,7 @@ describe('Consulta os products no BD e retorna todos os dados encontrados', () =
   })
 })
 
-describe('Consulta products no BD e retorna o produto com id específico', () => {
+describe('Consulta sales no BD e retorna o produto com id específico', () => {
   const res = {};
   const req = { params: { id: 1 } };
   const error = { params: { id: 5 } };

@@ -57,7 +57,8 @@ const newSale = async (prod) => {
       const result = productsAuth(prod[i].productId);
       auth.push(result);
   }
-    const auths = await Promise.all(auth);
+  const auths = await Promise.all(auth);
+  // https://medium.com/@chrisjr06/why-and-how-to-avoid-await-in-a-for-loop-32b86722171
     const notFound = auths.some((item) => item !== true);
     if (notFound) return { code: 404, message: { message: 'Product not found' } };
     const saleId = await salesModel.addSale();
