@@ -99,4 +99,19 @@ describe('Testa a função deleteSales', () => {
       expect(res.status.calledWith(201)).to.be.equal(true);
     })
   })
+
+  describe('Testa a função update', () => {
+  const res = {};
+  const req = {};
+  const next = () => {};
+  const resolve = [{}];
+    afterEach(sinon.restore)
+
+    it('Testa se retorna o status 200', async () => {
+      res.status = sinon.stub().returns(res);
+      sinon.stub(saleService, 'update').resolves({ code: 200, message: { saleId: 1, itemsUpdated: [{ productId: 1, quantity: 10 }] } });
+      await saleController.update(req, res, next);
+      expect(res.status.calledWith(200)).to.be.equal(true);
+    })
+  })
 })

@@ -16,16 +16,6 @@ const deleteSales = async (id) => {
   return true;
 };
 
-// const addSale = async () => {
-//   const data = await salesModel.addSale();
-//   return data;
-// }
-
-// const addSoldProduct = async (saleId, productId, quantity) => {
-//   const data = await salesModel.addSoldProduct(saleId, productId, quantity);
-//   return data;
-// }
-
 const productsAuth = async (id) => {
   const data = await productModel.findById(id);
   if (!data) return false;
@@ -72,9 +62,37 @@ const newSale = async (prod) => {
   return { code: 201, message: { id: saleId, itemsSold } };
 };
 
+const updateFunction = ({ productId, quantity }) => {
+  salesModel.update({ saleId, productId, quantity });
+  return { productId, quantity };
+};
+
+const update = async (saleId, prod) => { 
+const saleAuth = salesAuth(prod);
+  if (saleAuth.code) return saleAuth;  
+   const auth = [];
+  for (let i = 0; i < prod.length; i += 1) {
+      const result = productsAuth(prod[i].productId);
+      auth.push(result);
+  }
+  const auths = await Promise.all(auth);
+  // https://medium.com/@chrisjr06/why-and-how-to-avoid-await-in-a-for-loop-32b86722171
+  const notFound = auths.some((item) => item !== true);
+  if (notFound) return { code: 404, message: { message: 'Product not found' } };
+   
+  const itemsUpdated = prod.map(updateFunction)
+  // const itemsUpdated = prod.map((obj) => {
+  // salesModel.update({ saleId: saleId, productId: obj.productId, quantity: obj.quantity });
+  // return { productId: obj.productId, quantity: obj.quantity }
+  // })
+
+  return { code: 200, message: { saleId, itemsUpdated } };
+}
+
 module.exports = {
   getAll,
   findById,
   deleteSales,
   newSale,
+  update,
 };
