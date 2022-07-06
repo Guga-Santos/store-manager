@@ -56,7 +56,7 @@ const update = async (req, res, next) => {
   }
 };
 
-// Teste!
+// Teste!!
 
 module.exports = {
   getAll,
