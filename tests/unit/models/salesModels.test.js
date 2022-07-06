@@ -24,9 +24,10 @@ const mock = [
   }
 ]
 
-describe('Testa a função getAll', () => {
-  afterEach(sinon.restore);
-  beforeEach(() => sinon.stub(connection, 'execute').returns([mock]));
+describe('Sales Model', () => {
+  describe('Testa a função getAll', () => {
+    afterEach(sinon.restore);
+    beforeEach(() => sinon.stub(connection, 'execute').returns([mock]));
 
     it('Testa se retorna um array', async () => {
       const res = await salesModel.getAll();
@@ -37,11 +38,11 @@ describe('Testa a função getAll', () => {
       const res = await salesModel.getAll();
       expect(res).to.be.equal(mock);
     });
-});
+  });
   
-describe('Testa a função findById', () => {
+  describe('Testa a função findById', () => {
     afterEach(sinon.restore);
-  beforeEach(() => sinon.stub(connection, 'execute').returns([[mock[0]]]));
+    beforeEach(() => sinon.stub(connection, 'execute').returns([[mock[0]]]));
   
     it('Testa se retorna um array', async () => {
       const res = await salesModel.findById(1);
@@ -52,11 +53,11 @@ describe('Testa a função findById', () => {
       const res = await salesModel.findById(1);
       expect(res[0]).to.be.deep.equal(mock[0]);
     });
-});
+  });
   
-describe('Testa a função deleteSales', () => {
+  describe('Testa a função deleteSales', () => {
     afterEach(sinon.restore);
-  beforeEach(() => sinon.stub(connection, 'execute').resolves());
+    beforeEach(() => sinon.stub(connection, 'execute').resolves());
   
     it('Testa se retorna um booleano', async () => {
       const res = await salesModel.deleteSales(1);
@@ -67,17 +68,17 @@ describe('Testa a função deleteSales', () => {
       const res = await salesModel.deleteSales(1);
       expect(res).to.be.equal(true);
     });
-});
+  });
   
- describe('Testa a função addSale', () => {
-   afterEach(sinon.restore);
+  describe('Testa a função addSale', () => {
+    afterEach(sinon.restore);
     beforeEach(() => sinon.stub(connection, 'execute').returns([{ insertId: 3 }]));
     
     it('Testa se retorna um insertID', async () => {
       const res = await salesModel.addSale();
       expect(res).to.be.equal(3);
     });
- });
+  });
   
   describe('Testa a função addSoldProduct', () => {
     afterEach(sinon.restore);
@@ -88,3 +89,5 @@ describe('Testa a função deleteSales', () => {
       expect(res).to.be.deep.equal({ productId: 2, quantity: 1 });
     });
   });
+
+});
