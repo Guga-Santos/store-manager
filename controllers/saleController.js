@@ -56,6 +56,8 @@ const update = async (req, res, next) => {
   }
 };
 
+// Teste!
+
 module.exports = {
   getAll,
   findById,
