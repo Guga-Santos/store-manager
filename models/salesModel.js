@@ -55,9 +55,9 @@ const update = async ({ saleId, productId, quantity }) => {
       WHERE sale_id = ?
       AND product_id = ?;`;
   
-  await connection.execute(query, [quantity, saleId, productId])
+  await connection.execute(query, [quantity, saleId, productId]);
   return { productId, quantity };
-}
+};
 
 module.exports = {
   addSale,

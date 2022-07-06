@@ -28,7 +28,7 @@ const deleteProduct = async (id) => {
 const searchProduct = async (product) => {
   const data = await productModel.searchProduct(product);
   return data;
-}
+};
 
 module.exports = {
   getAll,

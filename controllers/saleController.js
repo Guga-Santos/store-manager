@@ -48,13 +48,13 @@ const update = async (req, res, next) => {
     const { id } = req.params;
     const data = await saleService.findById(id);
     if (!data || data.length < 1) return res.status(404).json({ message: 'Sale not found' });
-    const updated = await saleService.update(saleId=id, req.body);
+
+    const updated = await saleService.update(id, req.body);
     return res.status(updated.code).json(updated.message);
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 module.exports = {
   getAll,

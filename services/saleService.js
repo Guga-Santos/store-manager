@@ -62,10 +62,10 @@ const newSale = async (prod) => {
   return { code: 201, message: { id: saleId, itemsSold } };
 };
 
-const updateFunction = ({ productId, quantity }) => {
-  salesModel.update({ saleId, productId, quantity });
-  return { productId, quantity };
-};
+// const updateFunction = ({ productId, quantity }) => {
+//   salesModel.update({ saleId, productId, quantity });
+//   return { productId, quantity };
+// };
 
 const update = async (saleId, prod) => { 
 const saleAuth = salesAuth(prod);
@@ -80,14 +80,14 @@ const saleAuth = salesAuth(prod);
   const notFound = auths.some((item) => item !== true);
   if (notFound) return { code: 404, message: { message: 'Product not found' } };
    
-  const itemsUpdated = prod.map(updateFunction)
-  // const itemsUpdated = prod.map((obj) => {
-  // salesModel.update({ saleId: saleId, productId: obj.productId, quantity: obj.quantity });
-  // return { productId: obj.productId, quantity: obj.quantity }
-  // })
+  // const itemsUpdated = prod.map(updateFunction);
+  const itemsUpdated = prod.map((obj) => {
+  salesModel.update({ saleId, productId: obj.productId, quantity: obj.quantity });
+  return { productId: obj.productId, quantity: obj.quantity };
+  });
 
   return { code: 200, message: { saleId, itemsUpdated } };
-}
+};
 
 module.exports = {
   getAll,

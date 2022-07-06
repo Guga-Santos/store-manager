@@ -77,9 +77,9 @@ const searchProduct = async (req, res, next) => {
   const data = await productService.searchProduct(q);
   return res.status(200).json(data);
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
 
 module.exports = {
   getAll,
